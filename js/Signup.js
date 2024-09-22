@@ -51,7 +51,7 @@ document.getElementById('signupForm').addEventListener('submit', (e) => {
 });
 
 // Handle form submission for Log In
-document.getElementById('loginForm').addEventListener('submit', (e) => {
+login.getElementById('loginForm').addEventListener('click', (e) => {
   e.preventDefault();
 
   var email = document.getElementById('email').value;

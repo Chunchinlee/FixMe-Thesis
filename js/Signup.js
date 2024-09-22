@@ -26,9 +26,6 @@ document.getElementById('signupForm').addEventListener('submit', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;
- // var username = document.getElementById('firstname').value;
- // var username = document.getElementById('middlename').value;
-// var username = document.getElementById('lastname').value;
 
   // Create new user
   createUserWithEmailAndPassword(auth, email, password)
@@ -52,26 +49,26 @@ document.getElementById('signupForm').addEventListener('submit', (e) => {
     });
 });
 
-login.addEventListener('click',(e)=>{
+// Handle form submission for Log In
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
   signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    const dt = new Date();
-    update(ref(database, 'users/' + user.uid), {
-      last_login: dt,
-      })
+    .then((userCredential) => {
+      const user = userCredential.user;
+      const dt = new Date();
+      update(ref(database, 'users/' + user.uid), {
+        last_login: dt,
+      });
 
       alert('User Logged in!');
-  
     })
-
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
-  })
-})
-
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert('Error: ' + errorMessage);
+    });
+});

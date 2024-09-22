@@ -61,7 +61,7 @@ login.addEventListener('click',(e)=>{
     const user = userCredential.user;
     const dt = new Date();
     update(ref(database, 'users/' + user.uid), {
-      last_login: username,
+      last_login: dt,
       })
 
       alert('User Logged in!');

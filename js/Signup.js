@@ -51,9 +51,7 @@ document.getElementById('signupForm').addEventListener('submit', (e) => {
 });
 
 // Handle form submission for Log In
-login.getElementById('loginForm').addEventListener('click', (e) => {
-  e.preventDefault();
-
+login.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
@@ -64,14 +62,16 @@ login.getElementById('loginForm').addEventListener('click', (e) => {
 
       const dt = new Date();
       update(ref(database, 'users/' + user.uid), {
-        last_login: username,
+        last_login: dt,
       })
 
       alert('User Logged in!');
+
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert('Error: ' + errorMessage);
+      
+      alert(errorMessage);
     });
 });

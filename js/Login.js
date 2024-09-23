@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,39 +19,31 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
-// Reference to login button
-const logindata = document.getElementById('logindata');
 
-if (logindata) {
-  logindata.addEventListener('click', (e) => {
-    // Prevent form default submission if needed
-    e.preventDefault();
+submitData.addEventListener('click', (e) => {
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
 
-    // Capture user input
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
 
-    // Sign in the user
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
-        // Update last login timestamp
-        var lgDate = new Date();
-        update(ref(database, 'users/' + user.uid), {
-          last_login: lgDate,
-        })
-          .then(() => {
-            alert('User Logged in Successfully');
-          })
-          .catch((error) => {
-            alert('Error updating last login: ' + error.message);
-          });
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+    var lgDate = new Date();
+    update(ref(database, 'users/' + user.uid), {
+      last_login: lgDate,
+    })
+      .then(() => {
+        alert('User Logged in Successfully');
       })
       .catch((error) => {
-        alert('Error signing in: ' + error.message);
+        alert(error.message);
       });
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
   });
-} else {
-  console.log('Login button not found');
-}
+});

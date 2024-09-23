@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,58 +15,25 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 const auth = getAuth();
-
-// Handle form submission for Sign Up
-document.getElementById('signupForm').addEventListener('submit', (e) => {
-  e.preventDefault();  // Prevent the default form submission
+submitData.addEventListener('click', (e) =>{
 
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;
 
-  // Create new user
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up successfully
-      const user = userCredential.user;
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+    alert('User Created Successfully');
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    alert(errorMessage);
+  });
 
-      // Save additional user info to Firebase Realtime Database
-      set(ref(database, 'users/' + user.uid), {
-        username: username,
-        email: email,
-        password: password,
-        createdAt: new Date().toISOString()
-      });
-
-      alert('User created successfully!');
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert('Error: ' + errorMessage);
-    });
 });
-
-// Handle form submission for Log In
-document.getElementById('Login').addEventListener('click', (e) => {
-  e.preventDefault();  // Make sure to prevent default form submission
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      const dt = new Date();
-      update(ref(database, 'users/' + user.uid), {
-        last_login: dt,
-      })
-      alert('User Logged in!');
-    })
-    .catch((error) => {
-      const errorMessage = error.message;
-      alert(errorMessage);
-    });
-});
-

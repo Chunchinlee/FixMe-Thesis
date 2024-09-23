@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getFirestore, setDoc, doc, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
 // Your web app's Firebase configuration
@@ -14,52 +14,39 @@ const firebaseConfig = {
   appId: "1:522121216989:web:4834570c0400d50e856c34"
 };
 
-// Initialize Firebasef
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const auth = getAuth();
 
-function showMessage(message, divId){
-  var messageDiv = document.getElementById(divId);
-  messageDiv.style.display="block";
-  setTimeout(function(){
-    messageDiv.style.opacity=0;
-  },5000);
-}
+// Handle form submission for Sign Up
+const.getElementById('signupForm').addEventListener('submit', (e) => {
+  e.preventDefault();  // Prevent the default form submission
 
-const SignUp = document.getElementById('addstudent');
-SignUp.addEventListener('click', (event) =>{
-  event.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const username = document.getElementById('username').value;
-  const auth = getAuth();
-  const db = getFirestore();
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+  var username = document.getElementById('username').value;
 
+  // Create new user
   createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-     const userData = {
-      email: email,
-      username: username,
-      password: password  
-     };
-     showMessage('Account Created Successfully', 'signUpMessage');
-     const docRef = doc (db, "Students", users.uid);
-     setDoc(docRef, userData)
-     .then(() =>{
-      window.location.href='Login.htmk';
-     })
-     .catch((error) =>{
-      console.error("Error Writting Document", error)
+    .then((userCredential) => {
+      // Signed up successfully
+      const user = userCredential.user;
 
-     })
-  })
-  .catch((error) =>{
-    const errorCode = error.code;
-    if(errorCode == 'auth/email-already-in-use'){
-      showMessage('Email Already Exist!', 'signUpMessage');
-    }
-    else{
-      showMessage('Unable to Create User!', 'signUpMessage')
-    }
-  })
-})
+      // Save additional user info to Firebase Realtime Database
+      set(ref(database, 'users/' + user.uid), {
+        username: username,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+      });
+
+      alert('User created successfully!');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert('Error: ' + errorMessage);
+    });
+});
+

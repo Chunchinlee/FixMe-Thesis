@@ -46,4 +46,9 @@ submitData.addEventListener('click', (e) => {
     const errorMessage = error.message;
     alert(errorMessage);
   });
+  signOut(auth).then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
 });

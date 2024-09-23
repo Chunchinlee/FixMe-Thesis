@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,36 +19,36 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
-
 submitData.addEventListener('click', (e) => {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-
+  e.preventDefault(); // Prevent default form submission if this is in a form
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
   signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-    var lgDate = new Date();
-    update(ref(database, 'users/' + user.uid), {
-      last_login: lgDate,
-    })
+    .then((userCredential) => {
+      const user = userCredential.user;
+      const lgDate = new Date().toISOString(); // Store as ISO string
+      update(ref(database, 'users/' + user.uid), {
+        last_login: lgDate,
+      })
       .then(() => {
         alert('User Logged in Successfully');
       })
       .catch((error) => {
         alert(error.message);
       });
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
-  });
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      alert(errorMessage);
+    });
 });
+
+// Optional: Use this for signing out if needed
+function logoutUser() {
+  signOut(auth).then(() => {
+    alert('User signed out successfully.');
+  }).catch((error) => {
+    alert('Sign-out error: ' + error.message);
+  });
+}

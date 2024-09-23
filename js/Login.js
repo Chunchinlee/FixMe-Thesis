@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
-submitData.addEventListener('click', (e) => {
+logindata.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;

@@ -30,14 +30,15 @@ if (submitData) {
 }
 
 submitData.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent default form submission
+  console.log('Button clicked'); // Debugging: check if the click event is triggered
+
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;
-  //dont touch!!!!! anything here!!
-  var first_name = document.getElementById('firstnane').value;
+  var first_name = document.getElementById('firstname').value;
   var middle_name = document.getElementById('middlename').value;
   var last_name = document.getElementById('lastname').value;
-  var username = document.getElementById('username').value;
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {

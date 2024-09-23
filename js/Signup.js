@@ -29,6 +29,7 @@ const password = document.getElementById('password').value;
   .then((userCredentials) =>{
     const user = userCredentials.user;
     alert("Account Created!")
+    window.location.href = "Student.html";
   })
   .catch((error) =>{
     const errorCode = error.code;

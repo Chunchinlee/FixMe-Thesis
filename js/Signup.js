@@ -20,7 +20,7 @@ const database = getDatabase(app);
 const auth = getAuth();
 
 // Handle form submission for Sign Up
-const.getElementById('signupForm').addEventListener('submit', (e) => {
+document.getElementById('signupForm').addEventListener('submit', (e) => {
   e.preventDefault();  // Prevent the default form submission
 
   var email = document.getElementById('email').value;

@@ -16,25 +16,37 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 const auth = getAuth();
 
-const submit = document.getElementById('submit');
-submit.addEventListener("click", function (event){
-  event.defaultPrevented()
-  
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+// Handle form submission for Sign Up
+const.getElementById('addstudent').addEventListener('submit', (e) => {
+  e.preventDefault();  // Prevent the default form submission
 
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+  var username = document.getElementById('username').value;
+
+  // Create new user
   createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredentials) =>{
-    const user = userCredentials.user;
-    alert("Account Created!")
-    window.location.href = "Student.html";
-  })
-  .catch((error) =>{
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage)
-  });
-})
+    .then((userCredential) => {
+      // Signed up successfully
+      const user = userCredential.user;
+
+      // Save additional user info to Firebase Realtime Database
+      set(ref(database, 'users/' + user.uid), {
+        username: username,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+      });
+
+      alert('User created successfully!');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert('Error: ' + errorMessage);
+    });
+});
 

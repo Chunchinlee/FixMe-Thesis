@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Firebase configuration
@@ -20,14 +20,24 @@ const auth = getAuth();
 const database = getDatabase();
 
 submitData.addEventListener('click', (e) => {
-  e.preventDefault(); // Prevent default form submission if this is in a form
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      const lgDate = new Date().toISOString(); // Store as ISO string
+
+      if (!user.emailVerified) {
+        sendEmailVerification(user)
+          .then(() => {
+            alert('Verification email sent! Check your inbox.');
+          })
+          .catch((error) => {
+            alert('Error sending verification email: ' + error.message);
+          });
+      }
+
+      const lgDate = new Date().toISOString();
       update(ref(database, 'users/' + user.uid), {
         last_login: lgDate,
       })
@@ -43,12 +53,3 @@ submitData.addEventListener('click', (e) => {
       alert(errorMessage);
     });
 });
-
-// Optional: Use this for signing out if needed
-function logoutUser() {
-  signOut(auth).then(() => {
-    alert('User signed out successfully.');
-  }).catch((error) => {
-    alert('Sign-out error: ' + error.message);
-  });
-}

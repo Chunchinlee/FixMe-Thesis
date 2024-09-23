@@ -50,6 +50,8 @@ submitData.addEventListener('click', (e) => {
         });
     })
     .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
       alert(error.message);
     });
 });

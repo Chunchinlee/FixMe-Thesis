@@ -146,29 +146,30 @@
      left: 0;
      width: 100%;
  }
- .input-with-btn {
-  display: flex;
-  align-items: center;
-}
+    .input-with-btn {
+      display: flex;
+      align-items: center;
+    }
+    
+    .input-with-btn input {
+      flex: 1;
+    }
 
-.input-with-btn input {
-  flex: 1;
-  margin-right: 10px; /* Add margin to separate input from button */
-}
+    .get-code-btn {
+      font-size: 12px;
+      padding: 5px 10px;
+      margin-left: 10px;
+      cursor: pointer;
+      background: #404D7A;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      transition: 0.3s ease;
+    }
 
-.get-code-btn {
-  font-size: 12px;
-  padding: 5px 10px;
-  cursor: pointer;
-  background: #404D7A;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  transition: 0.3s ease;
-}
-
-.get-code-btn:hover {
-  background-color: #fff;
-  color: #404D7A;
-  border: 1px solid #404D7A;
-}
+    .get-code-btn:hover {
+      background-color: #fff;
+      color: #404D7A;
+      border: 1px solid #404D7A;
+    }
+ 

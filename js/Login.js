@@ -19,31 +19,32 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
-logindata.addEventListener('click', (e) => {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  var username = document.getElementById('username').value;
+// Ensure logindata button exists
+const logindata = document.getElementById('logindata');
 
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    var lgdate = new Date();
-    update(ref(database, 'users/' + user.uid), {
-      last_login: lgDate,
-    })
-      .then(() => {
-        alert('User Logged in Successfully');
+if (logindata) {
+  logindata.addEventListener('click', (e) => {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        var lgDate = new Date();
+        update(ref(database, 'users/' + user.uid), {
+          last_login: lgDate,
+        })
+          .then(() => {
+            alert('User Logged in Successfully');
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
       })
       .catch((error) => {
         alert(error.message);
       });
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
   });
-
- 
-});
+} else {
+  console.log('Login button not found');
+}

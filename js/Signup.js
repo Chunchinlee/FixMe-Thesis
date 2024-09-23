@@ -36,9 +36,6 @@ submitData.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;
-  var first_name = document.getElementById('firstname').value;
-  var middle_name = document.getElementById('middlename').value;
-  var last_name = document.getElementById('lastname').value;
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {

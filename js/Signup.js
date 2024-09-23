@@ -28,14 +28,20 @@ submitData.addEventListener('click', (e) =>{
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    set(ref(database, 'users/' + user.uid), {
+    set(ref(database, 'users/' + userId), {
       username: username,
       email: email,
-      password: password,
-      createdAt: new Date().toISOString()
-    });
+      password: password
 
-    alert('User Created Successfully');
+    })
+    .then(() => {
+      // Data saved successfully!
+      alert('User Created Successfully');
+    })
+    .catch((error) => {
+      // The write failed...
+      alert(error);
+    });
     
   })
   .catch((error) => {

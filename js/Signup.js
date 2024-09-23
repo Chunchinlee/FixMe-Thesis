@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,8 +27,15 @@ submitData.addEventListener('click', (e) =>{
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    // ...
+    set(ref(database, 'users/' + user.uid), {
+      username: username,
+      email: email,
+      password: password,
+      createdAt: new Date().toISOString()
+    });
+
     alert('User Created Successfully');
+    
   })
   .catch((error) => {
     const errorCode = error.code;

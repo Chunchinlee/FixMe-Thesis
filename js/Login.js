@@ -2,25 +2,23 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/fireba
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-const firebaseConfig = {/* config here */};
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth();
-
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
+// Handle form submission for Log In
+document.getElementById('Login').addEventListener('click', (e) => {
+  e.preventDefault();  // Make sure to prevent default form submission
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      update(ref(database, 'users/' + user.uid), { last_login: new Date().toISOString() });
-      alert('User logged in successfully!');
-      window.location.href = "student.html";
+      const dt = new Date();
+      update(ref(database, 'users/' + user.uid), {
+        last_login: dt,
+      })
+      alert('User Logged in!');
     })
     .catch((error) => {
-      alert('Error: ' + error.message);
+      const errorMessage = error.message;
+      alert(errorMessage);
     });
 });

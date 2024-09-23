@@ -173,3 +173,20 @@
       border: 1px solid #404D7A;
     }
  
+    .input-with-btn {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+    
+    .input-with-btn .input-field {
+      flex: 1;
+      margin-right: 2px;
+    }
+    
+    .input-with-btn .get-code-btn {
+      flex-shrink: 0;
+      padding: 10px 15px; 
+      font-size: 13px; 
+    }
+    

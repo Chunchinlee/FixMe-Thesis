@@ -18,37 +18,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
-submitData.addEventListener('click', (e) =>{
 
+// Ensure submitData button exists
+const submitData = document.getElementById('submitData');
+
+console.log(submitData); // Debugging: check if the button is being selected
+if (submitData) {
+  console.log('Button found!');
+} else {
+  console.log('Button not found!');
+}
+
+submitData.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;
 
   createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    set(ref(database, 'users/' + user.uid), {
-      username: username,
-      email: email,
-      password: password
-
-    })
-    .then(() => {
-      // Data saved successfully!
-      alert('User Created Successfully');
+    .then((userCredential) => {
+      const user = userCredential.user;
+      set(ref(database, 'users/' + user.uid), {
+        username: username,
+        email: email,
+        password: password
+      })
+        .then(() => {
+          alert('User Created Successfully');
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     })
     .catch((error) => {
-      // The write failed...
-      alert(error);
+      alert(error.message);
     });
-    
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-    alert(errorMessage);
-  });
-
 });

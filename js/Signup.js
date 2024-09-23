@@ -28,7 +28,7 @@ submitData.addEventListener('click', (e) =>{
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    set(ref(database, 'users/' + userId), {
+    set(ref(database, 'users/' + user.uid), {
       username: username,
       email: email,
       password: password

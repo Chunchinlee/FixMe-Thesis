@@ -20,6 +20,7 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 const signInButton = document.getElementById("signInButton");
+const signOutButton = document.getElementById("signOutButton");
 
 const userSignIn = async() =>{
   signInWithPopup(auth, provider)
@@ -31,6 +32,14 @@ const userSignIn = async() =>{
     const errorMessage = error.message;
   }) 
 }
+
+const userSigOut = async() =>{
+  signOut(auth, provider)
+  .then((result) =>{
+    alert("You have Sign out successfully!")
+  }).catch((error) =>{}) 
+}
+
 onAuthStateChanged(auth, (user) =>{
   if(user) {
     alert("You have Signed in!");
@@ -38,6 +47,7 @@ onAuthStateChanged(auth, (user) =>{
   }
 })
 signInButton.addEventListener('click', userSignIn);
+signOutButton.addEventListener('click', userSignIn);
 
 
 

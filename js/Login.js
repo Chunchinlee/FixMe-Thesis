@@ -37,11 +37,9 @@ const userSignIn = async () => {
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-      signOutButton.style.display = "block";
-      message.style.display = "block";
+        alert("You have Signed in!");
+       
     } else {
-      signOutButton.style.display = "none";
-      message.style.display = "none";
         // Handle signed out state if needed
     }
 });

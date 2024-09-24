@@ -184,4 +184,47 @@ footer {
         padding: 0.5em 1em;
     }
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    align-items: center;
+}
+
+li {
+    margin-right: 20px; 
+}
+.about {
+    background-color: #3c0a99;
+    color: rgb(255, 255, 255);
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 20px; 
+    cursor: pointer; 
+    border-radius: 10px;
+    transition: background-color 0.3s ease; 
+    font-family: 'Minecraft Ten';
+}
+
+.about:hover {
+    background-color: #000000; 
+}
+
+button#signInButton {
+    background-color: #3c0a99;
+    color: rgb(255, 255, 255);
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 20px; 
+    cursor: pointer; 
+    border-radius: 10px;
+    transition: background-color 0.3s ease; 
+    font-family: 'Minecraft Ten';
+}
+
+button#signInButton:hover {
+    background-color: #000000; 
+}
+
 

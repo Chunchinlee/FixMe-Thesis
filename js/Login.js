@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChaged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Firebase configuration
@@ -17,39 +17,27 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const database = getDatabase();
+const provider = new GoogleAuthProvider();
 
+const signInButton = document.getElementById("signInButton");
 
-submitData.addEventListener('click', (e) => {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-
-
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-    var lgDate = new Date();
-    update(ref(database, 'users/' + user.uid), {
-      last_login: lgDate,
-    })
-      .then(() => {
-        alert('User Logged in Successfully');
-        window.location.href = 'Student.html';
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  })
-  .catch((error) => {
+const userSignIn = async() =>{
+  signInWithPopup(auth, provider)
+  .then((result) =>{
+    const user = result.user
+    console.log(user);
+  }).catch((error) =>{
     const errorCode = error.code;
     const errorMessage = error.message;
-    alert(errorMessage);
-  });
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-});
+  }) 
+}
+onAuthStateChaged(auth, (user) =>{
+  if(user) {
+    alert("You have Signed in!");
+  }else{
+  }
+})
+signInButton.addEventListener('click', userSignIn);
+
+
+

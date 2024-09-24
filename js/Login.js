@@ -22,8 +22,6 @@ const signInButton = document.getElementById("signInButton");
 const signOutButton = document.getElementById("signOutButton");
 const message  = document.getElementById("message");
 
-signOutButton.style.display = "none";
-message.style.display = "none";
 
 const userSignIn = async () => {
     try {

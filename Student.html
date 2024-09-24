@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Page</title>
 </head>
 <body>
-    
+  <h2>Welcome, <span id="userName"></span></h2>
+  <p>Your email: <span id="userEmail"></span></p>
+
+  <script>
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email');
+    const uid = urlParams.get('uid');
+
+    // Display the email
+    document.getElementById('userEmail').textContent = email;
+
+    // Optionally, fetch user name from Firebase using the UID
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+    const database = getDatabase();
+    get(ref(database, 'users/' + uid)).then((snapshot) => {
+      if (snapshot.exists()) {
+        const userData = snapshot.val();
+        document.getElementById('userName').textContent = userData.name;
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  </script>
 </body>
 </html>

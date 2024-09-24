@@ -39,3 +39,4 @@ onAuthStateChanged(auth, (user) => {
 });
 
 signInButton.addEventListener('click', userSignIn);
+signOutButton

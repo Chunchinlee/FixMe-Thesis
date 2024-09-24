@@ -238,7 +238,7 @@ button#signOutButton {
     font-family: 'Minecraft Ten';
 }
 
-button#signInButton:hover {
+button#signOutButton:hover {
     background-color: #000000; 
 }
 

@@ -36,6 +36,7 @@ submitData.addEventListener('click', (e) => {
     })
       .then(() => {
         alert('User Logged in Successfully');
+        window.location.href = 'student.html';
       })
       .catch((error) => {
         alert(error.message);

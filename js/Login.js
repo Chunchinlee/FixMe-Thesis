@@ -31,9 +31,12 @@ document.getElementById('submitData').addEventListener('click', (e) => {
         .then((userCredential) => {
             const user = userCredential.user;
 
+            // Store user ID in localStorage
+            localStorage.setItem('loggedInUserId', user.uid);
+
             // Update last login date in the database
             update(ref(database, 'users/' + user.uid), {
-                last_login: new Date().toISOString() // Store the date as a string in ISO format
+                last_login: new Date().toISOString()
             }).then(() => {
                 // Redirect to Student page
                 window.location.href = 'Student.html';

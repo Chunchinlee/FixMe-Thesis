@@ -33,7 +33,7 @@ submitData.addEventListener('click', (e) => {
         last_login: lgDate,
       }).then(() => {
         // Redirect to student.html with email and user ID as URL parameters
-        window.location.href = `student.html?email=${encodeURIComponent(email)}&uid=${user.uid}`;
+        window.location.href = `Student.html?email=${encodeURIComponent(email)}&uid=${user.uid}`;
       }).catch((error) => {
         alert(error.message);
       });

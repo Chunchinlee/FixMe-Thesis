@@ -226,7 +226,7 @@ button#signInButton {
 button#signInButton:hover {
     background-color: #000000; 
 }
-
+button#signInButton,
 button#signOutButton {
     background-color: #3c0a99;
     color: rgb(255, 255, 255);
@@ -238,7 +238,7 @@ button#signOutButton {
     transition: background-color 0.3s ease; 
     font-family: 'Minecraft Ten';
 }
-
+button#signInButton:hover,
 button#signOutButton:hover {
     background-color: #000000; 
 }

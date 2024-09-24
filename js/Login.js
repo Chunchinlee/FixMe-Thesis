@@ -33,6 +33,7 @@ const userSignIn = async () => {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         alert("You have Signed in!");
+        window.location.href = 'Student.html';
     } else {
         // Handle signed out state if needed
     }

@@ -5,13 +5,13 @@ import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBJ0PlYIIMJOHh2xueY5XdG4hdLu9aQAu0",
-  authDomain: "fixme-a1b21.firebaseapp.com",
-  databaseURL: "https://fixme-a1b21-default-rtdb.firebaseio.com",
-  projectId: "fixme-a1b21",
-  storageBucket: "fixme-a1b21.appspot.com",
-  messagingSenderId: "522121216989",
-  appId: "1:522121216989:web:4834570c0400d50e856c34"
+    apiKey: "AIzaSyBJ0PlYIIMJOHh2xueY5XdG4hdLu9aQAu0",
+    authDomain: "fixme-a1b21.firebaseapp.com",
+    databaseURL: "https://fixme-a1b21-default-rtdb.firebaseio.com",
+    projectId: "fixme-a1b21",
+    storageBucket: "fixme-a1b21.appspot.com",
+    messagingSenderId: "522121216989",
+    appId: "1:522121216989:web:4834570c0400d50e856c34"
 };
 
 // Initialize Firebase
@@ -19,37 +19,32 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
+// Add event listener to the submit button
+document.getElementById('submitData').addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent form submission
 
-submitData.addEventListener('click', (e) => {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
+    // Sign in the user
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
 
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-    var lgDate = new Date();
-    update(ref(database, 'users/' + user.uid), {
-      last_login: lgDate,
-    })
-      .then(() => {
-        alert('User Logged in Successfully');
-        window.location.assign('../Student.html');
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
-  });
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
+            // Store user ID in localStorage
+            localStorage.setItem('loggedInUserId', user.uid);
+
+            // Update last login date in the database
+            update(ref(database, 'users/' + user.uid), {
+                last_login: new Date().toISOString()
+            }).then(() => {
+                // Redirect to Student page
+                window.location.href = 'Student.html';
+            }).catch((error) => {
+                alert("Error updating last login: " + error.message);
+            });
+        })
+        .catch((error) => {
+            alert("Login error: " + error.message);
+        });
 });

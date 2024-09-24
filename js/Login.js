@@ -19,9 +19,6 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 const signInButton = document.getElementById("signInButton");
-const signOutButton = document.getElementById("signOutButton");
-const message  = document.getElementById("message");
-
 
 const userSignIn = async () => {
     try {
@@ -36,7 +33,7 @@ const userSignIn = async () => {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         alert("You have Signed in!");
-        window.location.href = 'Student.html';
+         window.location.href = 'Student.html';
     } else {
         // Handle signed out state if needed
     }

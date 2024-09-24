@@ -51,7 +51,7 @@ const email = urlParams.get('email');
 const uid = urlParams.get('uid');
 
 // If we're on the student.html page, execute the following logic
-if (window.location.pathname.includes('student.html')) {
+if (window.location.pathname.includes('Student.html')) {
   document.getElementById('userEmail').textContent = email;
 
   get(ref(database, 'users/' + uid)).then((snapshot) => {

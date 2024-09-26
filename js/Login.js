@@ -32,6 +32,7 @@ const userSignIn = async () => {
     .then((result) => {
       const user = result.user;
       console.log(user);
+      
     })
     .catch((error) => {
       console.log(error);  // Add this to log the error for debugging
@@ -60,7 +61,8 @@ onAuthStateChanged(auth, (user) => {
 });
 
 signInButton.addEventListener('click', userSignIn);
-signOutButton.addEventListener('click', userSigOut);
+signOutButton.addEventListener('click', userSignOut);
+
 
 
 

@@ -18,6 +18,8 @@ a:hover {
     color: #23527c;
 }
 
+
+
 /* Header Styles */
 header {
     background-color: #333;
@@ -37,26 +39,20 @@ header nav {
     margin-right: 1em;
 }
 .logo img {
+    /*max-width: 100%;*/
     height: auto;
     width: 125px;
-    transition: transform 0.3s;
+    transition: transform 0.3s; /* Smooth transition for hover */
 }
 .logo a:hover img {
-    transform: scale(1.05);
+    transform: scale(1.05);     /* Slightly enlarge the logo on hover */
 }
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-li {
-    margin-right: 20px;
+    list-style-type: none;      /* Remove bullet points */
 }
 .download-btn {
     background-color: cyan;
-    color: #fff;
+    color: #ffffff;
     padding: 1em 2em;
     border: none;
     border-radius: 5px;
@@ -67,12 +63,14 @@ li {
 }
 .download-btn img {
     margin-right: 0.5em;
-    width: 45px;
-    height: 45px;
+    width: 45px;    /* Increased size */
+    height: 45px;   /* Increased size */
 }
 .download-btn:hover {
     background-color: #00bcd4;
 }
+
+
 
 /* Hero Styles */
 .hero {
@@ -102,13 +100,24 @@ li {
     animation: wave 2s infinite;
 }
 @keyframes wave {
-    0%, 50%, 100% {
+    0% {
         transform: translateY(-5px);
     }
-    25%, 75% {
+    25% {
         transform: translateY(0);
     }
+    50% {
+        transform: translateY(-5px);
+    }
+    75% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
 }
+
+
 
 /* Features Styles */
 .features {
@@ -139,14 +148,16 @@ li {
     font-size: 1.5em;
     margin-top: 0.5em;
 }
-
 /* Footer Styles */
 footer {
     background-color: #333;
     color: #fff;
     padding: 1em;
     text-align: center;
+    clear: both;
 }
+
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -173,22 +184,48 @@ footer {
         padding: 0.5em 1em;
     }
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    align-items: center;
+}
 
-/* Button Styles */
-button#signInButton,
-button#signOutButton {
+li {
+    margin-right: 20px; 
+}
+.about {
     background-color: #3c0a99;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
+    color: rgb(255, 255, 255);
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 20px; 
+    cursor: pointer; 
     border-radius: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease; 
     font-family: 'Minecraft Ten';
 }
 
+.about:hover {
+    background-color: #000000; 
+}
+
+button#signInButton,
+button#signOutButton {
+    background-color: #3c0a99;
+    color: rgb(255, 255, 255);
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 20px; 
+    cursor: pointer; 
+    border-radius: 10px;
+    transition: background-color 0.3s ease; 
+    font-family: 'Minecraft Ten';
+}
 button#signInButton:hover,
 button#signOutButton:hover {
-    background-color: #000;
+    background-color: #000000; 
 }
+
+

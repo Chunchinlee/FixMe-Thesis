@@ -32,7 +32,7 @@ const userSignIn = async () => {
     .then((result) => {
       const user = result.user;
       console.log(user);
-      
+      window.location.href = 'Student.html';
     })
     .catch((error) => {
       console.log(error);  // Add this to log the error for debugging

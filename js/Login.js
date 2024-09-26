@@ -21,7 +21,11 @@ const provider = new GoogleAuthProvider();
 
 const signInButton = document.getElementById("signInButton");
 const signOutButton = document.getElementById("signOutButton");
+const message = document.getElementById("message");
+const userName = document.getElementById("userName");
 
+signInButton.style.display ="none";
+message.style.display = "none";
 const userSignIn = async() =>{
   signInWithPopup(auth, provider)
   .then((result) =>{
@@ -42,8 +46,12 @@ const userSigOut = async() =>{
 
 onAuthStateChanged(auth, (user) =>{
   if(user) {
-    alert("You have Signed in!");
+    signInButton.style.display ="block";
+    message.style.display ="block";
+    userName.innerHTML = user.displayName;
   }else{
+    signInButton.style.display ="none";
+    message.style.display ="none";
   }
 })
 signInButton.addEventListener('click', userSignIn);

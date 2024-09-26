@@ -24,8 +24,9 @@ const signOutButton = document.getElementById("signOutButton");
 const message = document.getElementById("message");
 const userName = document.getElementById("userName");
 
-signInButton.style.display ="none";
+signOutButton.style.display ="none";
 message.style.display = "none";
+
 const userSignIn = async () => {
   signInWithPopup(auth, provider)
     .then((result) => {

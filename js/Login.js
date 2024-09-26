@@ -49,12 +49,10 @@ const userSignOut = async () => {
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    signInButton.style.display = "none"; // User is signed in, hide sign-in button
     signOutButton.style.display = "block"; // Show sign-out button
     message.style.display = "block";
     userName.innerHTML = user.displayName;
   } else {
-    signInButton.style.display = "block"; // User is signed out, show sign-in button
     signOutButton.style.display = "none"; // Hide sign-out button
     message.style.display = "none";
   }

@@ -32,10 +32,11 @@ const userSignIn = async () => {
     .then((result) => {
       const user = result.user;
       console.log(user);
+      console.log("Redirecting to Student.html"); // Debug log
       window.location.href = 'Student.html';
     })
     .catch((error) => {
-      console.log(error);  // Add this to log the error for debugging
+      console.log(error);  
     });
 }
 
@@ -45,7 +46,7 @@ const userSignOut = async () => {
       alert("You have signed out successfully!");
     })
     .catch((error) => {
-      console.log(error);  // Add this to log the error for debugging
+      console.log(error); 
     });
 }
 

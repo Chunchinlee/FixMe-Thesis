@@ -26,34 +26,40 @@ const userName = document.getElementById("userName");
 
 signInButton.style.display ="none";
 message.style.display = "none";
-const userSignIn = async() =>{
+const userSignIn = async () => {
   signInWithPopup(auth, provider)
-  .then((result) =>{
-    const user = result.user
-    console.log(user);
-  }).catch((error) =>{
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  }) 
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      console.log(error);  // Add this to log the error for debugging
+    });
 }
 
-const userSigOut = async() =>{
-  signOut(auth, provider)
-  .then((result) =>{
-    alert("You have Sign out successfully!")
-  }).catch((error) =>{}) 
+const userSignOut = async () => {
+  signOut(auth)
+    .then(() => {
+      alert("You have signed out successfully!");
+    })
+    .catch((error) => {
+      console.log(error);  // Add this to log the error for debugging
+    });
 }
 
-onAuthStateChanged(auth, (user) =>{
-  if(user) {
-    signInButton.style.display ="block";
-    message.style.display ="block";
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    signInButton.style.display = "none"; // User is signed in, hide sign-in button
+    signOutButton.style.display = "block"; // Show sign-out button
+    message.style.display = "block";
     userName.innerHTML = user.displayName;
-  }else{
-    signInButton.style.display ="none";
-    message.style.display ="none";
+  } else {
+    signInButton.style.display = "block"; // User is signed out, show sign-in button
+    signOutButton.style.display = "none"; // Hide sign-out button
+    message.style.display = "none";
   }
-})
+});
+
 signInButton.addEventListener('click', userSignIn);
 signOutButton.addEventListener('click', userSigOut);
 

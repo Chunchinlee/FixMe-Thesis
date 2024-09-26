@@ -229,4 +229,10 @@ button#signOutButton:hover {
     background-color: #000000; 
 }
 
+@font-face {
+    font-family: 'Minecraft Ten';
+    src: url('MinecraftTen-VGORe.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} 
 

@@ -1,0 +1,47 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBJ0PlYIIMJOHh2xueY5XdG4hdLu9aQAu0",
+    authDomain: "fixme-a1b21.firebaseapp.com",
+    databaseURL: "https://fixme-a1b21-default-rtdb.firebaseio.com",
+    projectId: "fixme-a1b21",
+    storageBucket: "fixme-a1b21.appspot.com",
+    messagingSenderId: "522121216989",
+    appId: "1:522121216989:web:4834570c0400d50e856c34"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+
+const signOutButton = document.getElementById("signOutButton");
+const message = document.getElementById("message");
+const userName = document.getElementById("userName");
+
+signOutButton.style.display ="none";
+message.style.display = "none";
+
+const userSignOut = async () => {
+    signOut(auth)
+      .then(() => {
+        alert("You have signed out successfully!");
+      })
+      .catch((error) => {
+        console.log(error); 
+      });
+  }
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      signOutButton.style.display = "block"; // Show sign-out button
+      message.style.display = "block";
+      userName.innerHTML = user.displayName;
+    } else {
+      signOutButton.style.display = "none"; // Hide sign-out button
+      message.style.display = "none";
+    }
+  });
+
+  signOutButton.addEventListener('click', userSignOut);

@@ -33,7 +33,7 @@ const userSignIn = async () => {
       const user = result.user;
       console.log(user);
       console.log("Redirecting to Student.html"); // Debug log
-      window.location.href = 'Student.html';
+      window.location.href = 'Login.html';
     })
     .catch((error) => {
       console.log(error);  
@@ -60,9 +60,7 @@ onAuthStateChanged(auth, (user) => {
     message.style.display = "none";
   }
 });
-document.getElementById('next').addEventListener('click', function() {
-  window.location.href = 'login.html'; // Redirect to login.html
-});
+
 signInButton.addEventListener('click', userSignIn);
 signOutButton.addEventListener('click', userSignOut);
 

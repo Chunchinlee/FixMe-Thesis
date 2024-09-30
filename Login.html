@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fix Me Login</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    @font-face {
+        font-family: 'Minecraft Ten';
+        src: url('MinecraftTen-VGORe.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
   <script type="module" src="js/Login.js" defer></script>
 </head>
 <body>
@@ -12,13 +20,12 @@
     <form>
       <h2>Login</h2>
       <div class="input-field">
-        <input type="number" id="email" name="email" required min="0" oninput="validity.valid||(value='');">
-        <label>Enter your Student Number</label>
+        <input type="text" id="email" name="email" required>
+        <label>Enter your email</label>
       </div>
       <div class="input-field">
         <input type="password" id="password" name="password" required>
         <label>Enter your password</label>
-        <span class="toggle-password" onclick="togglePassword()" style="cursor: pointer;">👁️</span>
       </div>
       <div class="input-with-btn">
         <div class="input-field">

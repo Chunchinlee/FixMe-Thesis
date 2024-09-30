@@ -40,7 +40,7 @@ submitData.addEventListener('click', (e) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      set(ref(database, 'students/' + user.uid), {
+      set(ref(database, 'users/' + user.uid), {
         username: username,
         email: email,
         password: password

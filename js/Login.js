@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Firebase configuration
@@ -17,44 +17,54 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const database = getDatabase();
+const provider = new GoogleAuthProvider();
 
-// Toggle password visibility
-function togglePassword() {
-  const passwordInput = document.getElementById('password');
-  const toggleIcon = document.querySelector('.toggle-password');
-  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-  passwordInput.setAttribute('type', type);
-  toggleIcon.textContent = type === 'password' ? '👁️' : '🙈'; // Change icon based on state
-}
+const signInButton = document.getElementById("signInButton");
+const signOutButton = document.getElementById("signOutButton");
+const message = document.getElementById("message");
+const userName = document.getElementById("userName");
 
-// Event listener for the "Log In" button
-document.getElementById('submitData').addEventListener('click', (e) => {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
+signOutButton.style.display ="none";
+message.style.display = "none";
 
-  // Input validation: Ensure only numbers are allowed for the student number
-  if (!/^\d+$/.test(email)) {
-    alert("Please enter a valid Student Number (numbers only).");
-    return;
-  }
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      var lgDate = new Date();
-      update(ref(database, 'Students/' + user.uid), {
-        last_login: lgDate,
-      })
-      .then(() => {
-        alert('User Logged in Successfully');
-        window.location.href = 'Student.html';
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+const userSignIn = async () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      console.log("Redirecting to Student.html"); // Debug log
+      window.location.href = 'Student.html';
     })
     .catch((error) => {
-      alert(error.message);
+      console.log(error);  
     });
+}
+
+const userSignOut = async () => {
+  signOut(auth)
+    .then(() => {
+      alert("You have signed out successfully!");
+    })
+    .catch((error) => {
+      console.log(error); 
+    });
+}
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    signOutButton.style.display = "block"; // Show sign-out button
+    message.style.display = "block";
+    userName.innerHTML = user.displayName;
+  } else {
+    signOutButton.style.display = "none"; // Hide sign-out button
+    message.style.display = "none";
+  }
 });
+
+signInButton.addEventListener('click', userSignIn);
+signOutButton.addEventListener('click', userSignOut);
+
+
+
+
+

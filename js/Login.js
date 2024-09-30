@@ -31,7 +31,7 @@ submitData.addEventListener('click', (e) => {
     const user = userCredential.user;
     // ...
     var lgDate = new Date();
-    update(ref(database, 'users/' + user.uid), {
+    update(ref(database, 'Students/' + user.uid), {
       last_login: lgDate,
     })
       .then(() => {

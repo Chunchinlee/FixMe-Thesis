@@ -24,7 +24,7 @@ a:hover {
 header {
     background-color: #333;
     color: #fff;
-    padding: 1em;
+    padding: 5px;
     text-align: center;
     position: sticky;
     top: 0;
@@ -36,12 +36,14 @@ header nav {
     align-items: center;
 }
 .logo {
-    margin-right: 1em;
+    margin-left: 10px;
+    margin-bottom: 0;  
+    margin-right: 10px;
 }
 .logo img {
     /*max-width: 100%;*/
     height: auto;
-    width: 125px;
+    width: 100px;
     transition: transform 0.3s; /* Smooth transition for hover */
 }
 .logo a:hover img {
@@ -193,16 +195,16 @@ ul {
 }
 
 li {
-    margin-right: 20px; 
+    margin-right: 7px; 
 }
 .about {
     background-color: #3c0a99;
     color: rgb(255, 255, 255);
     border: none; 
-    padding: 10px 20px; 
-    font-size: 20px; 
+    padding: 8px 15px; 
+    font-size: 18px; 
     cursor: pointer; 
-    border-radius: 10px;
+    border-radius: 8px;
     transition: background-color 0.3s ease; 
     font-family: 'Minecraft Ten';
 }
@@ -217,10 +219,10 @@ button#signOutButton {
     background-color: #3c0a99;
     color: rgb(255, 255, 255);
     border: none; 
-    padding: 10px 20px; 
-    font-size: 20px; 
+    padding: 8px 15px; 
+    font-size: 18px; 
     cursor: pointer; 
-    border-radius: 10px;
+    border-radius: 8px;
     transition: background-color 0.3s ease; 
     font-family: 'Minecraft Ten';
 }

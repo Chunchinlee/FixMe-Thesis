@@ -60,7 +60,9 @@ onAuthStateChanged(auth, (user) => {
     message.style.display = "none";
   }
 });
-
+document.getElementById('next').addEventListener('click', function() {
+  window.location.href = 'login.html'; // Redirect to login.html
+});
 signInButton.addEventListener('click', userSignIn);
 signOutButton.addEventListener('click', userSignOut);
 

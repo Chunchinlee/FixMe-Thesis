@@ -54,3 +54,54 @@ submitData.addEventListener('click', (e) => {
   });
 });
 -----------------------------------------------------------------------
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
+
+const signInButton = document.getElementById("signInButton");
+const signOutButton = document.getElementById("signOutButton");
+const message = document.getElementById("message");
+const userName = document.getElementById("userName");
+
+signOutButton.style.display ="none";
+message.style.display = "none";
+
+const userSignIn = async () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      console.log("Redirecting to Student.html"); // Debug log
+      window.location.href = 'Login.html';
+    })
+    .catch((error) => {
+      console.log(error);  
+    });
+}
+
+const userSignOut = async () => {
+  signOut(auth)
+    .then(() => {
+      alert("You have signed out successfully!");
+    })
+    .catch((error) => {
+      console.log(error); 
+    });
+}
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    signOutButton.style.display = "block"; // Show sign-out button
+    message.style.display = "block";
+    userName.innerHTML = user.displayName;
+  } else {
+    signOutButton.style.display = "none"; // Hide sign-out button
+    message.style.display = "none";
+  }
+});
+
+signInButton.addEventListener('click', userSignIn);
+signOutButton.addEventListener('click', userSignOut);
+
+

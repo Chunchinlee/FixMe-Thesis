@@ -29,42 +29,32 @@ function togglePassword() {
 }
 
 // Event listener for the "Log In" button
-submitData.addEventListener('click', (e) => {
+document.getElementById('submitData').addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
-  var studentno = document.getElementById('studentno').value;
   var password = document.getElementById('password').value;
 
   // Input validation: Ensure only numbers are allowed for the student number
-  if (!/^\d+$/.test(email)) {  // Regex to check if the email field contains only numbers
+  if (!/^\d+$/.test(email)) {
     alert("Please enter a valid Student Number (numbers only).");
-    return; // Stop the form submission if the input is not valid
+    return;
   }
 
-  signInWithEmailAndPassword(auth, studentno, password)
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
       const user = userCredential.user;
-      // ...
       var lgDate = new Date();
       update(ref(database, 'Students/' + user.uid), {
         last_login: lgDate,
       })
-        .then(() => {
-          alert('User Logged in Successfully');
-          window.location.href = 'Student.html';
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      .then(() => {
+        alert('User Logged in Successfully');
+        window.location.href = 'Student.html';
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
     })
     .catch((error) => {
-      const errorMessage = error.message;
-      alert(errorMessage);
+      alert(error.message);
     });
-
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
 });

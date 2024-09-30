@@ -31,6 +31,7 @@ function togglePassword() {
 // Event listener for the "Log In" button
 submitData.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
+  var studentno = document.getElementById('studentno').value;
   var password = document.getElementById('password').value;
 
   // Input validation: Ensure only numbers are allowed for the student number
@@ -39,7 +40,7 @@ submitData.addEventListener('click', (e) => {
     return; // Stop the form submission if the input is not valid
   }
 
-  signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(auth, studentno, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;

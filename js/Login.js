@@ -19,11 +19,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
-
 submitData.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
+  // Input validation: Ensure only numbers are allowed for the student number
+  if (!/^\d+$/.test(email)) {  // Regex to check if the email field contains only numbers
+    alert("Please enter a valid Student Number (numbers only).");
+    return; // Stop the form submission if the input is not valid
+  }
 
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
@@ -43,10 +47,10 @@ submitData.addEventListener('click', (e) => {
       });
   })
   .catch((error) => {
-    const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage);
   });
+  
   signOut(auth).then(() => {
     // Sign-out successful.
   }).catch((error) => {

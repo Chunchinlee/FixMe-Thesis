@@ -19,6 +19,16 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
+// Toggle password visibility
+function togglePassword() {
+  const passwordInput = document.getElementById('password');
+  const toggleIcon = document.querySelector('.toggle-password');
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+  toggleIcon.textContent = type === 'password' ? '👁️' : '🙈'; // Change icon based on state
+}
+
+// Event listener for the "Log In" button
 submitData.addEventListener('click', (e) => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
@@ -30,27 +40,27 @@ submitData.addEventListener('click', (e) => {
   }
 
   signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-    var lgDate = new Date();
-    update(ref(database, 'Students/' + user.uid), {
-      last_login: lgDate,
-    })
-      .then(() => {
-        alert('User Logged in Successfully');
-        window.location.href = 'Student.html';
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+      var lgDate = new Date();
+      update(ref(database, 'Students/' + user.uid), {
+        last_login: lgDate,
       })
-      .catch((error) => {
-        alert(error.message);
-      });
-  })
-  .catch((error) => {
-    const errorMessage = error.message;
-    alert(errorMessage);
-  });
-  
+        .then(() => {
+          alert('User Logged in Successfully');
+          window.location.href = 'Student.html';
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      alert(errorMessage);
+    });
+
   signOut(auth).then(() => {
     // Sign-out successful.
   }).catch((error) => {

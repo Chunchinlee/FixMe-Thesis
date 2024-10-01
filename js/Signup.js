@@ -37,13 +37,17 @@ submitData.addEventListener('click', (e) => {
   var password = document.getElementById('password').value;
   var username = document.getElementById('username').value;
 
+  // Create a new user with the provided email and password
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+
+      // Set the user data in the Realtime Database, including the role as 'student'
       set(ref(database, 'users/' + user.uid), {
         username: username,
         email: email,
-        password: password
+        password: password,  // You should not store passwords in the database; this is for example purposes
+        role: 'student'  // Assign the 'student' role
       })
         .then(() => {
           alert('User Created Successfully');

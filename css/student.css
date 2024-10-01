@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    background-color: #404D7A;
+    overflow: hidden;
+    padding: 10px 0;
+}
+.navbar a, .navbar button {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 16px;
+}
+.navbar .right {
+    float: right;
+}
+.navbar .right a {
+    padding: 14px 20px;
+}
+.navbar .right .user-info {
+    padding: 14px 16px;
+    color: white;
+}
+.navbar button:hover, .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.content {
+    padding: 20px;
+}
+.content h2 {
+    color: #404D7A;
+}
+.content p {
+    margin-bottom: 20px;
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}

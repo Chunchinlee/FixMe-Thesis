@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 // Firebase configuration
@@ -18,6 +18,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
+const message = document.getElementById("message");
+const userName = document.getElementById("userName");
+message.style.display = "none";
 
 
 submitData.addEventListener('click', (e) => {
@@ -53,3 +56,15 @@ submitData.addEventListener('click', (e) => {
     // An error happened.
   });
 });
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    message.style.display = "block";
+    userName.innerHTML = user.displayName;
+  } else {
+    message.style.display = "none";
+  }
+});
+
+signInButton.addEventListener('click', userSignIn);
+signOutButton.addEventListener('click', userSignOut);

@@ -11,37 +11,3 @@ const firebaseConfig = {
     messagingSenderId: "522121216989",
     appId: "1:522121216989:web:4834570c0400d50e856c34"
   };
-  
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-
-const signOutButton = document.getElementById("signOutButton");
-const message = document.getElementById("message");
-const userName = document.getElementById("userName");
-
-signOutButton.style.display ="none";
-message.style.display = "none";
-
-const userSignOut = async () => {
-    signOut(auth)
-      .then(() => {
-        alert("You have signed out successfully!");
-      })
-      .catch((error) => {
-        console.log(error); 
-      });
-  }
-  
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      signOutButton.style.display = "block"; // Show sign-out button
-      message.style.display = "block";
-      userName.innerHTML = user.displayName;
-    } else {
-      signOutButton.style.display = "none"; // Hide sign-out button
-      message.style.display = "none";
-    }
-  });
-
-  signOutButton.addEventListener('click', userSignOut);

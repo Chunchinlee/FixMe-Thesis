@@ -1,144 +1,192 @@
-    /* login css */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+ /* login css */
+ @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Minecraft Ten', sans-serif;
+ }
+ body {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh;
+   width: 100%;
+   padding: 0 10px;
+ }
+ body::before {
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background: url('../images/background.png') no-repeat center center/cover, #000;
+   background-position: center;
+   background-size: cover;
+ }
+ .wrapper {
+   width: 400px;
+   border-radius: 8px;
+   padding: 30px;
+   text-align: center;
+   border: 1px solid rgba(255, 255, 255, 0.5);
+   backdrop-filter: blur(5px);
+   -webkit-backdrop-filter: blur(5px);
+   background: rgba(255, 255, 255, 0.2); 
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+ }
+ form {
+   display: flex;
+   flex-direction: column;
+ }
+ h2 {
+   font-size: 2rem;
+   margin-bottom: 20px;
+   color: #fff;
+ }
+ .input-field {
+   position: relative;
+   border-bottom: 2px solid #ccc;
+   margin: 20px 0;
+ 
+ }
+ .input-field label {
+   position: absolute;
+   top: 50%;
+   left: 0;
+   transform: translateY(-50%);
+   color: #fff;
+   font-size: 16px;
+   pointer-events: none;
+   transition: 0.15s ease;
+ }
+ .input-field input {
+   width: 100%;
+   height: 40px;
+   background: transparent;
+   border: none;
+   outline: none;
+   font-size: 16px;
+   color: #fff;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+   padding: 5px;
+   opacity: 0.9;
+ }
+ .input-field input:focus~label,
+ .input-field input:valid~label {
+   font-size: 0.8rem;
+   top: 10px;
+   transform: translateY(-120%);
+ }
+ .forget {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin: 25px 0 35px 0;
+   color: #fff;
+ }
+ #remember {
+   accent-color: #fff;
+ }
+ .forget label {
+   display: flex;
+   align-items: center;
+ }
+ .forget label p {
+   margin-left: 8px;
+ }
+ .wrapper a {
+   color: #efefef;
+   text-decoration: none;
+ }
+ .wrapper a:hover {
+   text-decoration: underline;
+ }
+ button {
+   background: #fff;
+   color: #000;
+   font-weight: 600;
+   border: none;
+   padding: 12px 20px;
+   cursor: pointer;
+   border-radius: 3px;
+   font-size: 16px;
+   border: 2px solid transparent;
+   transition: 0.3s ease;
+ }
+ button:hover {
+   color: #fff;
+   border-color: #fff;
+   background: rgba(255, 255, 255, 0.15);
+ }
+ .register {
+   text-align: center;
+   margin-top: 30px;
+   color: #fff;
+ }
+.messageDiv{
+  background-color: hsl(327, 90%, 28%);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  opacity: 0;
+  animation: fadeOut 7s forwards;
 }
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  padding: 0 10px;
-}
-body::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url('background.png') no-repeat center center/cover, #000;
-  background-position: center;
-  background-size: cover;
-}
-.wrapper {
-  width: 400px;
-  border-radius: 8px;
-  padding: 30px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background: rgba(255, 255, 255, 0.2); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-form {
-  display: flex;
-  flex-direction: column;
-}
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #fff;
-}
-.input-field {
-  position: relative;
-  border-bottom: 2px solid #ccc;
-  margin: 20px 0;
+ /* Get Code Button */
+ 
+ /* Footer */
+ footer {
+     background-color: #333; 
+     color: white;
+     text-align: center;
+     padding: 20px 0;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+ }
+    .input-with-btn {
+      display: flex;
+      align-items: center;
+    }
+    
+    .input-with-btn input {
+      flex: 1;
+    }
 
-}
-.input-field label {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.15s ease;
-}
-.input-field input {
-  width: 100%;
-  height: 40px;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  padding: 5px;
-  opacity: 0.9;
-}
-.input-field input:focus~label,
-.input-field input:valid~label {
-  font-size: 0.8rem;
-  top: 10px;
-  transform: translateY(-120%);
-}
-.forget {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 25px 0 35px 0;
-  color: #fff;
-}
-#remember {
-  accent-color: #fff;
-}
-.forget label {
-  display: flex;
-  align-items: center;
-}
-.forget label p {
-  margin-left: 8px;
-}
-.wrapper a {
-  color: #efefef;
-  text-decoration: none;
-}
-.wrapper a:hover {
-  text-decoration: underline;
-}
-button {
-  background: #fff;
-  color: #000;
-  font-weight: 600;
-  border: none;
-  padding: 12px 20px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 16px;
-  border: 2px solid transparent;
-  transition: 0.3s ease;
-}
-button:hover {
-  color: #fff;
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-}
-.register {
-  text-align: center;
-  margin-top: 30px;
-  color: #fff;
-}
-/* Footer */
-footer {
-    background-color: #333; 
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
+    .get-code-btn {
+      font-size: 12px;
+      padding: 5px 10px;
+      margin-left: 10px;
+      cursor: pointer;
+      background: #404D7A;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      transition: 0.3s ease;
+    }
 
-footer p {
-    margin: 0;
-}
-img.headerr{
-  position:fixed;
-  bottom: 870px;
-}
+    .get-code-btn:hover {
+      background-color: #fff;
+      color: #404D7A;
+      border: 1px solid #404D7A;
+    }
+ 
+    .input-with-btn {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+    
+    .input-with-btn .input-field {
+      flex: 1;
+      margin-right: 2px;
+    }
+    
+    .input-with-btn .get-code-btn {
+      flex-shrink: 0;
+      padding: 10px 15px; 
+      font-size: 13px; 
+    }
+    

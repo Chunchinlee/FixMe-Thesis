@@ -189,4 +189,11 @@
       padding: 10px 15px; 
       font-size: 13px; 
     }
-    
+    #togglePassword {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #000000;
+    }
+        
